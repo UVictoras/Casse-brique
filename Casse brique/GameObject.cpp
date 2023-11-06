@@ -17,6 +17,7 @@ GameObject::GameObject(bool bType, float fX, float fY, float fSizeL, float fSize
 		m_sGraphism = new sf::CircleShape(m_fSizeL);
 	}
 	m_sGraphism->setPosition(m_fX, m_fY);
+	m_sGraphism->setFillColor(cColor);
 }
 
 void GameObject::Draw(sf::RenderWindow* oWindow)
