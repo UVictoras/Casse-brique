@@ -8,18 +8,14 @@
 int main()
 {
     //Création d'une fenêtre
-    sf::RenderWindow oWindow(sf::VideoMode(640, 480), "SFML");
+    sf::RenderWindow oWindow(sf::VideoMode(1920, 1080), "SFML");
 
+    GameObject Circle(false, 960.f, 540.f, 100.f, 0.f, sf::Color::Red);
 
-    GameObject Circle(false, 100.f, 100.f, 100.f, 0.f, sf::Color::Red);
+    GameObject Rectangle(true, 960.f, 540.f, 50.f, 50.f, sf::Color::Blue);
 
-
-
-    //Création d'un rectangle de taille 50, 50
-    sf::RectangleShape oRectangle(sf::Vector2f(50.f, 50.f));
-    //Et de couleur rouge
-    oRectangle.setFillColor(sf::Color::Red);
-
+    sf::Clock oClock;
+    float fDeltaTime = 0;
     //GameLoop
     while (oWindow.isOpen())
     {
@@ -30,28 +26,19 @@ int main()
             if (oEvent.type == sf::Event::Closed)
                 oWindow.close();
         }
-
-        //UPDATE
+		sf::Vector2i localPosition = sf::Mouse::getPosition(oWindow);
 
         //DRAW
         oWindow.clear();
 
         Circle.Draw(&oWindow);
-        oWindow.draw(oRectangle);
+        Circle.Move(fDeltaTime);
+        Rectangle.Draw(&oWindow);
+        Rectangle.Rotate(localPosition.x, localPosition.y);
 
         oWindow.display();
+        fDeltaTime = oClock.restart().asSeconds();
     }
 
     return 0;
 }
-
-// Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
-// Déboguer le programme : F5 ou menu Déboguer > Démarrer le débogage
-
-// Astuces pour bien démarrer : 
-//   1. Utilisez la fenêtre Explorateur de solutions pour ajouter des fichiers et les gérer.
-//   2. Utilisez la fenêtre Team Explorer pour vous connecter au contrôle de code source.
-//   3. Utilisez la fenêtre Sortie pour voir la sortie de la génération et d'autres messages.
-//   4. Utilisez la fenêtre Liste d'erreurs pour voir les erreurs.
-//   5. Accédez à Projet > Ajouter un nouvel élément pour créer des fichiers de code, ou à Projet > Ajouter un élément existant pour ajouter des fichiers de code existants au projet.
-//   6. Pour rouvrir ce projet plus tard, accédez à Fichier > Ouvrir > Projet et sélectionnez le fichier .sln.
