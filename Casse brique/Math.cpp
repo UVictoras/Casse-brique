@@ -3,10 +3,6 @@
 
 void Math::Normalize(float* fX, float* fY)
 {
-	float fTX = *fX;
-	float fTY = *fY;
-	float fLength = fTX * fTX + fTY * fTY;
-	float fMagnitude = sqrtf(fLength);
-	*fX = *fX / fMagnitude;
-	*fY = *fY / fMagnitude;
+	*fX /= sqrtf((*fX * *fX + *fY * *fY));
+	*fY /= sqrtf((*fX * *fX + *fY * *fY));
 }

@@ -38,6 +38,10 @@ void GameObject::Move(float fDeltaTime)
 }
 void GameObject::Rotate(float vLocalPositionX, float vLocalPositionY)
 {
-	float mouseAngle = -atan2( vLocalPositionX - m_fX , vLocalPositionY - m_fY) * 180 / 3.14159;
-	m_sGraphism->setRotation(mouseAngle);
+	if ( vLocalPositionY < m_fY)
+	{
+		m_sGraphism->setOrigin(m_fSizeL/2, 0);
+		float mouseAngle = -atan2(vLocalPositionX - m_fX, vLocalPositionY - m_fY) * 180 / 3.14159;
+		m_sGraphism->setRotation(mouseAngle);
+	}
 }

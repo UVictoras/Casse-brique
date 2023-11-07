@@ -10,7 +10,7 @@ int main()
     //Création d'une fenêtre
     sf::RenderWindow oWindow(sf::VideoMode(1920, 1080), "SFML");
 
-    GameObject Circle(false, 960.f, 540.f, 100.f, 0.f, sf::Color::Red);
+    GameObject Circle(false, 960.f, 540.f, 50.f, 0.f, sf::Color::Red);
 
     GameObject Rectangle(true, 960.f, 540.f, 50.f, 50.f, sf::Color::Blue);
 
