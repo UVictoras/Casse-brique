@@ -61,9 +61,20 @@ void GameObject::CollidObject(GameObject Object)
 	bool bIsYMaxInside = IsInsideInterval(Object.m_fY, m_fY, m_fY + m_fSizeL);
 
 
-	if ((bIsXMinInside or bIsXMaxInside) and (bIsYMinInside or bIsYMaxInside))
+	if (m_fX < Object.m_fX + Object.m_fSizeL)
 	{
 		m_fDirection.x = -m_fDirection.x;
+	}
+	else if (m_fX, m_fX + m_fSizeL > Object.m_fX)
+	{
+		m_fDirection.x = -m_fDirection.x;
+	}
+	else if (m_fX < Object.m_fY + Object.m_fSizeH)
+	{
+		m_fDirection.y = -m_fDirection.y;
+	}
+	else if (m_fY + m_fSizeL > Object.m_fY)
+	{
 		m_fDirection.y = -m_fDirection.y;
 	}
 }
