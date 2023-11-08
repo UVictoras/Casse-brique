@@ -26,4 +26,8 @@ public:
 	void Move(float fDeltaTime);
 
 	void Rotate(float vLocalPositionX, float vLocalPositionY);
+
+	void CollidObject(GameObject Object);
+
+	void CollidWalls(char cDirection);
 }; 

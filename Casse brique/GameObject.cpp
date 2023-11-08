@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GameObject.h"
 #include "Math.h"
 #include <SFML/Graphics.hpp>
@@ -5,8 +6,8 @@
 GameObject::GameObject(bool bType, float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor)
 {
 	m_fDirection.x = 10.f;
-	m_fDirection.y = 10.f;
-	Math::Normalize(&m_fDirection.x, &m_fDirection.y);
+	m_fDirection.y = -5.f;
+	//Math::Normalize(&m_fDirection.x, &m_fDirection.y);
 
 	m_bType = bType; // True -> Rectangle; False -> Circle
 	m_fX = fX;
@@ -36,12 +37,45 @@ void GameObject::Move(float fDeltaTime)
 	m_fY += m_fDirection.y * fDeltaTime * 10.f;
 	m_sGraphism->setPosition(m_fX, m_fY);
 }
+
 void GameObject::Rotate(float vLocalPositionX, float vLocalPositionY)
 {
-	if ( vLocalPositionY < m_fY)
+	if (vLocalPositionY < m_fY)
 	{
-		m_sGraphism->setOrigin(m_fSizeL/2, 0);
-		float mouseAngle = -atan2(vLocalPositionX - m_fX, vLocalPositionY - m_fY) * 180 / 3.14159;
+		m_sGraphism->setOrigin(m_fSizeL / 2, 0);
+		float mouseAngle = Math::Rotate(this, vLocalPositionX, vLocalPositionY);
 		m_sGraphism->setRotation(mouseAngle);
+	}
+}
+
+bool IsInsideInterval(int v, int vMin, int vMax) 
+{
+	return v >= vMin && v <= vMax;
+}
+
+void GameObject::CollidObject(GameObject Object)
+{
+	bool bIsXMinInside  = IsInsideInterval(m_fX, Object.m_fX, Object.m_fX + Object.m_fSizeL);
+	bool bIsXMaxInside = IsInsideInterval(Object.m_fX, m_fX, m_fX + m_fSizeL);
+	bool bIsYMinInside = IsInsideInterval(m_fY, Object.m_fY, Object.m_fY + Object.m_fSizeH);
+	bool bIsYMaxInside = IsInsideInterval(Object.m_fY, m_fY, m_fY + m_fSizeL);
+
+
+	if ((bIsXMinInside or bIsXMaxInside) and (bIsYMinInside or bIsYMaxInside))
+	{
+		m_fDirection.x = -m_fDirection.x;
+		m_fDirection.y = -m_fDirection.y;
+	}
+}
+
+void GameObject::CollidWalls(char cDirection)
+{ // L for Left; R for Right; T for Top
+	if (cDirection == 'L' || cDirection == 'R')
+	{
+		m_fDirection.x = -m_fDirection.x;
+	}
+	else if (cDirection == 'T')
+	{
+		m_fDirection.y = -m_fDirection.y;
 	}
 }
