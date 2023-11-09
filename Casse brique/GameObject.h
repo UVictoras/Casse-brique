@@ -18,7 +18,7 @@ public:
 	sf::Vector2f m_fDirection;
 	sf::Shape* m_sGraphism;
 
-
+	GameObject();
 	GameObject(bool bType, float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor);
 
 	void Draw(sf::RenderWindow* oWindow);
@@ -27,7 +27,7 @@ public:
 
 	void Rotate(float vLocalPositionX, float vLocalPositionY);
 
-	void CollidObject(GameObject Object);
+	void CollidObject(GameObject* Object);
 
 	void CollidWalls(char cDirection);
 }; 

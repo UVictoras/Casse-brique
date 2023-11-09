@@ -7,7 +7,7 @@ GameObject::GameObject(bool bType, float fX, float fY, float fSizeL, float fSize
 {
 	m_fDirection.x = 10.f;
 	m_fDirection.y = -5.f;
-	//Math::Normalize(&m_fDirection.x, &m_fDirection.y);
+	Math::Normalize(&m_fDirection.x, &m_fDirection.y);
 
 	m_bType = bType; // True -> Rectangle; False -> Circle
 	m_fX = fX;
@@ -53,21 +53,21 @@ bool IsInsideInterval(int v, int vMin, int vMax)
 	return v >= vMin && v <= vMax;
 }
 
-void GameObject::CollidObject(GameObject Object)
+void GameObject::CollidObject(GameObject* Object)
 {
-	if (m_fX < Object.m_fX + Object.m_fSizeL)
+	if (m_fX < Object->m_fX + Object->m_fSizeL)
 	{
 		m_fDirection.x = -m_fDirection.x;
 	}
-	else if (m_fX, m_fX + m_fSizeL > Object.m_fX)
+	else if (m_fX + m_fSizeL > Object->m_fX)
 	{
 		m_fDirection.x = -m_fDirection.x;
 	}
-	else if (m_fX < Object.m_fY + Object.m_fSizeH)
+	else if (m_fX < Object->m_fY + Object->m_fSizeH)
 	{
 		m_fDirection.y = -m_fDirection.y;
 	}
-	else if (m_fY + m_fSizeL > Object.m_fY)
+	else if (m_fY + m_fSizeL > Object->m_fY)
 	{
 		m_fDirection.y = -m_fDirection.y;
 	}
