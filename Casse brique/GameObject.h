@@ -19,6 +19,7 @@ public:
 	sf::Shape* m_sGraphism;
 
 	GameObject();
+
 	GameObject(bool bType, float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor);
 
 	void Draw(sf::RenderWindow* oWindow);

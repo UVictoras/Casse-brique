@@ -4,8 +4,9 @@
 
 void Math::Normalize(float* fX, float* fY)
 {
-	*fX /= sqrtf((*fX * *fX + *fY * *fY));
-	*fY /= sqrtf((*fX * *fX + *fY * *fY));
+	float xtmp = *fX;
+	*fX /= sqrtf((xtmp * xtmp + *fY * *fY));
+	*fY /= sqrtf((xtmp * xtmp + *fY * *fY));
 }
 
 float Math::Rotate(GameObject* gGameObject, float vLocalPositionX, float vLocalPositionY)

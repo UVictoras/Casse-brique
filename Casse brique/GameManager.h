@@ -1,23 +1,37 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <map>
-#include "GameObject.h"
+#include "EventManager.h"
 
-typedef GameObject(*func)(GameObject* Canon);
+typedef void(*func)();
 using namespace std;
 
-GameObject Shoot(GameObject* Canon);
+GameObject* CreateBall(GameObject* Canon);
+
+void EventShoot();
 
 class GameManager
 {
-public:
-	map<sf::Event::EventType, map<sf::Mouse::Button, func>> m_cMap;
+private:
+	static GameManager* pInstance;
 
-	void AddComponent(sf::Event::EventType eventType, sf::Mouse::Button mouseEvent, func event);
+public:
+
+	static void Initialize() 
+	{
+		GameManager::pInstance = new GameManager();
+	}
+
+	static GameManager* Get() 
+	{
+		return pInstance;
+	}
+
+public:
+	EventManager* eEventManager;
 
 	GameManager();
 
-	GameObject EventManager(sf::Event::EventType eType, sf::Mouse::Button mousePressed, GameObject* Canon);
-
 	void GameLoop(sf::RenderWindow* oWindow);
+
+	void Shoot();
+
 };

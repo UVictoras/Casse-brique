@@ -8,8 +8,9 @@ int main()
     //Création d'une fenêtre
     sf::RenderWindow oWindow(sf::VideoMode(1920, 1080), "Casse-Brique");
 
-    GameManager mGameManager;
-    mGameManager.GameLoop(&oWindow);
+    GameManager::Initialize();
+
+    GameManager::Get()->GameLoop(&oWindow);
 
     return 0;
 }
