@@ -7,6 +7,7 @@ private:
 	int m_iMaxHp;
 public:
 	Brick(bool bType, float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor);
+	void Hit();
 
 
 };

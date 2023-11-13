@@ -4,7 +4,7 @@
 typedef void(*func)();
 using namespace std;
 
-GameObject* CreateBall(GameObject* Canon);
+void CreateBall();
 
 void EventShoot();
 
@@ -12,6 +12,14 @@ class GameManager
 {
 private:
 	static GameManager* pInstance;
+
+	Canon* oCanon;
+
+	std::vector<Ball*> m_oBalls;
+
+	sf::Vector2i localPosition;
+
+	sf::RenderWindow oWindow;
 
 public:
 
@@ -32,6 +40,9 @@ public:
 
 	void GameLoop(sf::RenderWindow* oWindow);
 
-	void Shoot();
+	//Events
 
+	void CreateBall();
+
+	void CloseWindow();
 };

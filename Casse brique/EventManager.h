@@ -26,9 +26,11 @@ public:
 	}
 
 public:
-	map<sf::Event::EventType, map<sf::Mouse::Button, func>> m_cMap;
+	map<sf::Event::EventType, map<sf::Mouse::Button, func>> m_cMouseMap;
+	map<sf::Event::EventType, func> m_cWindowEventMap;
+	map<sf::Event::EventType, map<sf::Keyboard::Key, func>> m_cKeyboardMap;
 
-	void AddComponent(sf::Event::EventType eventType, sf::Mouse::Button mouseEvent, func* event);
+	void AddComponent(sf::Event::EventType eventType, sf::Mouse::Button mouseEvent, func event);
 
 	EventManager();
 

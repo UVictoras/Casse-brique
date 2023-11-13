@@ -17,3 +17,10 @@ void Canon::Rotate(float vLocalPositionX, float vLocalPositionY)
 		m_sGraphism->setRotation(orientation);
 	}
 }
+
+void Canon::ChangeDirection(sf::Vector2i localPosition)
+{
+	m_fDirection.x = localPosition.x - m_fX;
+	m_fDirection.y = localPosition.y - m_fY;
+	Math::Normalize(&m_fDirection.x, &m_fDirection.y);
+}

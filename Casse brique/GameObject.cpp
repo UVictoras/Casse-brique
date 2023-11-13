@@ -48,5 +48,3 @@ bool IsInsideInterval(int v, int vMin, int vMax)
 {
 	return v >= vMin && v <= vMax;
 }
-
-

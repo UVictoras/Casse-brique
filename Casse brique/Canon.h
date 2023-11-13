@@ -9,5 +9,7 @@ public:
 
 	void Rotate(float vLocalPositionX, float vLocalPositionY);
 
+	void ChangeDirection(sf::Vector2i localPosition);
+
 };
 

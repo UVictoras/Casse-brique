@@ -1,19 +1,22 @@
 #pragma once
 #include "GameObject.h"
+#include "Brick.h"
+
 class Ball : public GameObject
 {
 
 public:
 	sf::Vector2f m_fMovement;
+	float fSpeed;
 
-	Ball(float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor);
+	Ball(float fX, float fY, float fSizeL, float fSizeH,float fDirectionX,float fDirectionY, sf::Color cColor);
 
 	void Move(float fDeltaTime);
 
-	void Rotate(float vLocalPositionX, float vLocalPositionY);
-
-	void CollidObject(GameObject* Object);
+	void CollidObject(Brick* Object);
 
 	void CollidWalls(char cMovement);
+
+	void SetDirection(sf::Vector2i localPosition);
 
 };

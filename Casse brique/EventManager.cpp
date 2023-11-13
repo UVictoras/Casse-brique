@@ -2,7 +2,7 @@
 
 EventManager* EventManager::eInstance = nullptr;
 
-void EventManager::AddComponent(sf::Event::EventType eventType, sf::Mouse::Button mouseEvent, func* event)
+void EventManager::AddComponent(sf::Event::EventType eventType, sf::Mouse::Button mouseEvent, func event)
 {
     m_cMap[eventType][mouseEvent] = *event;
 }
@@ -27,7 +27,7 @@ void EventManager::Update(sf::RenderWindow* oWindow)
 
 EventManager::EventManager(func* event)
 {
-    AddComponent(sf::Event::EventType::MouseButtonPressed, sf::Mouse::Left, event);
+    AddComponent(sf::Event::EventType::MouseButtonPressed, sf::Mouse::Left, *event);
 }
 
 void EventManager::ManageEvent(sf::Event::EventType eType, sf::Mouse::Button mousePressed)
