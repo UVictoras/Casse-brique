@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-class Brick : GameObject
+class Brick : public GameObject
 {
 private:
 	int m_iHp;

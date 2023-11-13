@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-class Ball : GameObject
+class Ball : public GameObject
 {
 
 public:

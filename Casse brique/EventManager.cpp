@@ -1,5 +1,7 @@
 #include "EventManager.h"
 
+EventManager* EventManager::eInstance = nullptr;
+
 void EventManager::AddComponent(sf::Event::EventType eventType, sf::Mouse::Button mouseEvent, func* event)
 {
     m_cMap[eventType][mouseEvent] = *event;

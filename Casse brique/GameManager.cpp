@@ -38,7 +38,7 @@ void GameManager::GameLoop(sf::RenderWindow* oWindow)
 
     Canon Rectangle(true, 960.f, 540.f, 50.f, 50.f, sf::Color::Blue);
 
-    m_oBalls.push_back(CreateBall(&Rectangle));
+    //m_oBalls.push_back(CreateBall(&Rectangle));
 
     sf::Clock oClock;
     float fDeltaTime = 0;

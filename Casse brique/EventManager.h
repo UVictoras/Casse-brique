@@ -22,7 +22,7 @@ public:
 
 	static EventManager* Get()
 	{
-		return eInstace;
+		return eInstance;
 	}
 
 public:
