@@ -23,7 +23,7 @@ private:
 
 public:
 
-	static void Initialize() 
+	static void Initialize()  
 	{
 		GameManager::pInstance = new GameManager();
 	}
@@ -38,7 +38,7 @@ public:
 
 	GameManager();
 
-	void GameLoop(sf::RenderWindow* oWindow);
+	void GameLoop();
 
 	//Events
 

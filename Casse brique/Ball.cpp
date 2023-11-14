@@ -7,7 +7,7 @@ Ball::Ball(float fX, float fY, float fSizeL, float fSizeH, float fDirectionX, fl
 {
 	m_fMovement.x = fDirectionX;
 	m_fMovement.y = fDirectionY;
-	fSpeed = 15;
+	fSpeed = 50;
 	Math::Normalize(&m_fMovement.x, &m_fMovement.y);
 }
 
@@ -18,27 +18,30 @@ void Ball::Move(float fDeltaTime)
 	m_sGraphism->setPosition(m_fX, m_fY);
 }
 
+bool IsInsideInterval(int v, int vMin, int vMax)
+{
+	return v >= vMin && v <= vMax;
+}
+
 void Ball::CollidObject(Brick* Object)
 {
-	if (m_fX < Object->m_fX + Object->m_fSizeL)
-	{
-		m_fMovement.x = -m_fMovement.x;
-		Object->Hit();
-	}
-	else if (m_fX + m_fSizeL > Object->m_fX)
-	{
-		m_fMovement.x = -m_fMovement.x;
-		Object->Hit();
-	}
-	else if (m_fY < Object->m_fY + Object->m_fSizeH)
+	bool Bot = IsInsideInterval(m_fY + m_fSizeH , Object->m_fY , Object->m_fY + Object->m_fSizeH );
+	bool Top = IsInsideInterval(m_fY, Object->m_fY , Object->m_fY + Object->m_fSizeH );
+	bool Right = IsInsideInterval(m_fX, Object->m_fX, Object->m_fX + Object->m_fSizeL);
+	bool Left = IsInsideInterval(m_fX + m_fSizeH, Object->m_fX, Object->m_fX + Object->m_fSizeL);
+
+	if (Top or Bot) 
 	{
 		m_fMovement.y = -m_fMovement.y;
 		Object->Hit();
+		return;
 	}
-	else if (m_fY + m_fSizeH > Object->m_fY)
+
+	if (Right or Left)
 	{
-		m_fMovement.y = -m_fMovement.y;
+		m_fMovement.x = -m_fMovement.x;
 		Object->Hit();
+		return;
 	}
 }
 

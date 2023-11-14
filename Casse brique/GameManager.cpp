@@ -11,11 +11,6 @@ void EventCreateBall()
     GameManager::Get()->CreateBall();
 }
 
-void EventCreateBall()
-{
-    GameManager::Get()->CreateBall();
-}
-
 void EventCloseWindow()
 {
     GameManager::Get()->CloseWindow();
@@ -36,67 +31,66 @@ void GameManager::CreateBall()
 
 GameManager::GameManager() : oWindow(sf::VideoMode(1920, 1080), "Casse-Brique")
 {
-
-
     oCanon = new Canon(true, 960.f, 1080.f, 50.f, 100.f, sf::Color::Magenta);
 }
 
-void GameManager::GameLoop(sf::RenderWindow* oWindow)
+void GameManager::GameLoop()
 {
     sf::Clock oClock;
     float fDeltaTime = 0;
     Brick nBrick(true, 960.f, 540.f, 75.f, 50.f, sf::Color::Blue);
     EventManager::Initialize();
     eEventManager->Get()->AddComponent(sf::Event::EventType::MouseButtonPressed, sf::Mouse::Left, &EventCreateBall);
+    eEventManager->Get()->AddComponent(sf::Event::EventType::KeyPressed, sf::Keyboard::Key::Escape, &EventCloseWindow);
 
     //GameLoop
-    while (oWindow->isOpen())
+    while (oWindow.isOpen())
     {
         //EVENT
-        EventManager::Get()->Update(oWindow);
+        EventManager::Get()->Update(&oWindow);
         
         if (m_oBalls.size() != 0)
         {
             for (int i = 0; i < m_oBalls.size(); i++)
             {
-                if (m_oBalls[i]->m_sGraphism->getGlobalBounds().intersects(nBrick.m_sGraphism->getGlobalBounds())) {
-                    m_oBalls[i]->CollidObject(&nBrick);
-                }
-                if (m_oBalls[i]->m_fX < 0)
+                if (nBrick.m_sGraphism != nullptr)
                 {
-                    m_oBalls[i]->CollidWalls('L');
-                }
-                if (m_oBalls[i]->m_fX + m_oBalls[i]->m_fSizeL * 2 > 1920)
-                {
-                    m_oBalls[i]->CollidWalls('R');
-                }
-                if (m_oBalls[i]->m_fY < 0)
-                {
-                    m_oBalls[i]->CollidWalls('T');
+                    if (m_oBalls[i]->m_sGraphism->getGlobalBounds().intersects(nBrick.m_sGraphism->getGlobalBounds())) {
+                        m_oBalls[i]->CollidObject(&nBrick);
+                    }
+                    if (m_oBalls[i]->m_fX < 0)
+                    {
+                        m_oBalls[i]->CollidWalls('L');
+                    }
+                    if (m_oBalls[i]->m_fX + m_oBalls[i]->m_fSizeL * 2 > 1920)
+                    {
+                        m_oBalls[i]->CollidWalls('R');
+                    }
+                    if (m_oBalls[i]->m_fY < 0)
+                    {
+                        m_oBalls[i]->CollidWalls('T');
+                    }
                 }
             }
         }
 
 
-        localPosition = sf::Mouse::getPosition(*oWindow);
+        localPosition = sf::Mouse::getPosition(oWindow);
 
         //DRAW
-        oWindow->clear();
+        oWindow.clear();
 
-        if (pressed.type)
-        {
-            eEventManager->Get()->ManageEvent(pressed.type, pressed.mouseButton.button);
-        }
+
         for (int i = 0; i < m_oBalls.size(); i++) {
-			m_oBalls[i]->Draw(oWindow);
+			m_oBalls[i]->Draw(&oWindow);
 			m_oBalls[i]->Move(fDeltaTime);
         }
-        oCanon->Draw(oWindow);
-		nBrick.Draw(oWindow);
+        oCanon->Draw(&oWindow);
+		nBrick.Draw(&oWindow);
         oCanon->Rotate(localPosition.x, localPosition.y);
         oCanon->ChangeDirection(localPosition);
 
-        oWindow->display();
+        oWindow.display();
         fDeltaTime = oClock.restart().asSeconds();
     }
 }

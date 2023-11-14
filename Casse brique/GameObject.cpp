@@ -41,10 +41,6 @@ GameObject::GameObject(bool bType, float fX, float fY, float fSizeL, float fSize
 
 void GameObject::Draw(sf::RenderWindow* oWindow)
 {
-	oWindow->draw(*m_sGraphism);
-}
-
-bool IsInsideInterval(int v, int vMin, int vMax) 
-{
-	return v >= vMin && v <= vMax;
+	if (m_sGraphism != nullptr)
+		oWindow->draw(*m_sGraphism);
 }

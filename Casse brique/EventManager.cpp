@@ -4,7 +4,12 @@ EventManager* EventManager::eInstance = nullptr;
 
 void EventManager::AddComponent(sf::Event::EventType eventType, sf::Mouse::Button mouseEvent, func event)
 {
-    m_cMap[eventType][mouseEvent] = *event;
+    m_cMouseMap[eventType][mouseEvent] = *event;
+}
+
+void EventManager::AddComponent(sf::Event::EventType eventType, sf::Keyboard::Key keyEvent, func event)
+{
+    m_cKeyboardMap[eventType][keyEvent] = *event;
 }
 
 EventManager::EventManager()
@@ -22,6 +27,7 @@ void EventManager::Update(sf::RenderWindow* oWindow)
             oWindow->close();
 
         ManageEvent(oEvent.type, oEvent.mouseButton.button);
+        ManageEvent(oEvent.type, oEvent.key.code);
     }
 }
 
@@ -32,8 +38,8 @@ EventManager::EventManager(func* event)
 
 void EventManager::ManageEvent(sf::Event::EventType eType, sf::Mouse::Button mousePressed)
 {
-    auto itType = m_cMap.find(eType);
-    if (itType == m_cMap.end())
+    auto itType = m_cMouseMap.find(eType);
+    if (itType == m_cMouseMap.end())
         return;
 
     auto itMouse = itType->second.find(mousePressed);
@@ -41,4 +47,17 @@ void EventManager::ManageEvent(sf::Event::EventType eType, sf::Mouse::Button mou
         return;
 
     itMouse->second();
+}
+
+void EventManager::ManageEvent(sf::Event::EventType eType, sf::Keyboard::Key keyPressed)
+{
+    auto itType = m_cKeyboardMap.find(eType);
+    if (itType == m_cKeyboardMap.end())
+        return;
+
+    auto itKey = itType->second.find(keyPressed);
+    if (itKey == itType->second.end())
+        return;
+
+    itKey->second();
 }
