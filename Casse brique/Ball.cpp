@@ -18,26 +18,19 @@ void Ball::Move(float fDeltaTime)
 	m_sGraphism->setPosition(m_fX, m_fY);
 }
 
-bool IsInsideInterval(int v, int vMin, int vMax)
-{
-	return v >= vMin && v <= vMax;
-}
-
 void Ball::CollidObject(Brick* Object)
 {
-	bool Bot = IsInsideInterval(m_fY + m_fSizeH , Object->m_fY , Object->m_fY + Object->m_fSizeH );
-	bool Top = IsInsideInterval(m_fY, Object->m_fY , Object->m_fY + Object->m_fSizeH );
-	bool Right = IsInsideInterval(m_fX, Object->m_fX, Object->m_fX + Object->m_fSizeL);
-	bool Left = IsInsideInterval(m_fX + m_fSizeH, Object->m_fX, Object->m_fX + Object->m_fSizeL);
+	float sizeLR = std::min(m_fY + m_fSizeL / 2, Object->m_fY + Object->m_fSizeH / 2) - std::max(m_fY + m_fSizeL / 2, Object->m_fY + Object->m_fSizeH / 2);
+	float sizeTB = std::min(m_fX + m_fSizeL / 2, Object->m_fX + Object->m_fSizeL / 2) - std::max(m_fX + m_fSizeL / 2, Object->m_fX + Object->m_fSizeH / 2);
 
-	if (Top or Bot) 
+	if (sizeTB>sizeLR)
 	{
 		m_fMovement.y = -m_fMovement.y;
 		Object->Hit();
 		return;
 	}
 
-	if (Right or Left)
+	else if (sizeLR>sizeTB)
 	{
 		m_fMovement.x = -m_fMovement.x;
 		Object->Hit();

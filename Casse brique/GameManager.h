@@ -4,10 +4,6 @@
 typedef void(*func)();
 using namespace std;
 
-void CreateBall();
-
-void EventShoot();
-
 class GameManager
 {
 private:
@@ -21,22 +17,38 @@ private:
 
 	sf::RenderWindow oWindow;
 
+	bool bWon, bLost, bCanShoot;
+
+	int iRemainingBalls;
+
+	GameObject* sLeftSquare;
+	GameObject* sRightSquare;
+
 public:
 
-	static void Initialize()  
+	static void Initialize()
 	{
 		GameManager::pInstance = new GameManager();
 	}
 
-	static GameManager* Get() 
+	static GameManager* Get()
 	{
 		return pInstance;
 	}
 
 public:
 	EventManager* eEventManager;
+	std::vector<Brick*> m_oBricks;
+	sf::Texture tBackground;
+	GameObject* sBackground;
 
 	GameManager();
+
+	void CheckWin();
+
+	void CheckLose();
+
+	void DeleteEmptyBricks();
 
 	void GameLoop();
 

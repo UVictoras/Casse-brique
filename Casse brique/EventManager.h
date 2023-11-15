@@ -37,7 +37,7 @@ public:
 
 	EventManager(func* event);
 
-	void Update(sf::RenderWindow* oWindow);
+	void Update(sf::RenderWindow* oWindow, bool bCanShoot);
 
 	void ManageEvent(sf::Event::EventType eType, sf::Mouse::Button mousePressed);
 

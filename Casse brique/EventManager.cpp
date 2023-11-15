@@ -17,7 +17,7 @@ EventManager::EventManager()
 
 }
 
-void EventManager::Update(sf::RenderWindow* oWindow)
+void EventManager::Update(sf::RenderWindow* oWindow, bool bCanShoot)
 { 
     //EVENT
     sf::Event oEvent;
@@ -26,7 +26,11 @@ void EventManager::Update(sf::RenderWindow* oWindow)
         if (oEvent.type == sf::Event::Closed)
             oWindow->close();
 
-        ManageEvent(oEvent.type, oEvent.mouseButton.button);
+        if (bCanShoot)
+        { 
+            ManageEvent(oEvent.type, oEvent.mouseButton.button);
+        }
+        
         ManageEvent(oEvent.type, oEvent.key.code);
     }
 }
