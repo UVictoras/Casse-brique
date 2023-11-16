@@ -6,5 +6,5 @@ class TextureManager
 public:
 	TextureManager();
 
-	void CreateTexture(sf::Texture* tTexture);
+	void CreateTexture(const char* cImageName, sf::Texture* tTexture);
 };

@@ -3,7 +3,7 @@
 class Canon : public GameObject
 {
 public:
-	float orientation;
+	float fOrientation;
 
 	Canon(bool bType, float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor);
 

@@ -3,13 +3,19 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-Ball::Ball(float fX, float fY, float fSizeL, float fSizeH, float fDirectionX, float fDirectionY, sf::Color cColor) : GameObject(false, fX, fY, fSizeL, fSizeH, cColor)
+Ball::Ball(float fX, float fY, float fSizeL, float fSizeH, float fDirectionX, float fDirectionY, sf::Color cColor) : GameObject(false, fX, fY, fSizeL, fSizeH, cColor) //Child class from GameObject
 {
 	m_fMovement.x = fDirectionX;
 	m_fMovement.y = fDirectionY;
 	fSpeed = 50;
 	Math::Normalize(&m_fMovement.x, &m_fMovement.y);
 }
+
+/*
+-----------------------------------------------------------------------
+|      Following are the methods corresponding to the Ball Class      |
+-----------------------------------------------------------------------
+*/
 
 void Ball::Move(float fDeltaTime)
 {
@@ -20,17 +26,17 @@ void Ball::Move(float fDeltaTime)
 
 void Ball::CollidObject(Brick* Object)
 {
-	float sizeLR = std::min(m_fY + m_fSizeL / 2, Object->m_fY + Object->m_fSizeH / 2) - std::max(m_fY + m_fSizeL / 2, Object->m_fY + Object->m_fSizeH / 2);
-	float sizeTB = std::min(m_fX + m_fSizeL / 2, Object->m_fX + Object->m_fSizeL / 2) - std::max(m_fX + m_fSizeL / 2, Object->m_fX + Object->m_fSizeH / 2);
+	float fSizeLR = std::min(m_fY + m_fSizeL / 2, Object->m_fY + Object->m_fSizeH / 2) - std::max(m_fY + m_fSizeL / 2, Object->m_fY + Object->m_fSizeH / 2);
+	float fSizeTB = std::min(m_fX + m_fSizeL / 2, Object->m_fX + Object->m_fSizeL / 2) - std::max(m_fX + m_fSizeL / 2, Object->m_fX + Object->m_fSizeH / 2);
 
-	if (sizeTB>sizeLR)
+	if (fSizeTB>fSizeLR)
 	{
 		m_fMovement.y = -m_fMovement.y;
 		Object->Hit();
 		return;
 	}
 
-	else if (sizeLR>sizeTB)
+	else if (fSizeLR>fSizeTB)
 	{
 		m_fMovement.x = -m_fMovement.x;
 		Object->Hit();

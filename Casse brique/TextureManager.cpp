@@ -5,10 +5,16 @@ TextureManager::TextureManager()
 
 }
 
-void TextureManager::CreateTexture(sf::Texture* tTexture)
+/*
+-----------------------------------------------------------------------
+| Following are the methods corresponding to the TextureManager Class |
+-----------------------------------------------------------------------
+*/
+
+void TextureManager::CreateTexture(const char* cImageName, sf::Texture* tTexture)
 {
 
-	if (!tTexture->loadFromFile("img/background.jpg"))
+	if (!tTexture->loadFromFile(cImageName))
 	{
 		//Image not loaded
 		return;

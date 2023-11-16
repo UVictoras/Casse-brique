@@ -13,7 +13,7 @@ private:
 
 	std::vector<Ball*> m_oBalls;
 
-	sf::Vector2i localPosition;
+	sf::Vector2i vLocalPosition;
 
 	sf::RenderWindow oWindow;
 
@@ -23,6 +23,9 @@ private:
 
 	GameObject* sLeftSquare;
 	GameObject* sRightSquare;
+
+	sf::Font fFont;
+	sf::Text tText;
 
 public:
 
@@ -39,7 +42,7 @@ public:
 public:
 	EventManager* eEventManager;
 	std::vector<Brick*> m_oBricks;
-	sf::Texture tBackground;
+	sf::Texture tBackground, tCanon, tBrick, tBrokenBrick, tBall, tWin, tLose;
 	GameObject* sBackground;
 
 	GameManager();
@@ -49,6 +52,8 @@ public:
 	void CheckLose();
 
 	void DeleteEmptyBricks();
+
+	void SetBricksTexture();
 
 	void GameLoop();
 

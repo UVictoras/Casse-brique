@@ -16,6 +16,12 @@ GameObject::GameObject()
 	m_sGraphism = NULL;
 }
 
+/*
+-----------------------------------------------------------------------
+|   Following are the methods corresponding to the GameObject Class   |
+-----------------------------------------------------------------------
+*/
+
 GameObject::GameObject(bool bType, float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor)
 {
 	m_fDirection.x = 10.f;

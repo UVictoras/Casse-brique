@@ -3,18 +3,24 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-Canon::Canon(bool bType, float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor) : GameObject(bType, fX, fY, fSizeL, fSizeH, cColor)
+Canon::Canon(bool bType, float fX, float fY, float fSizeL, float fSizeH, sf::Color cColor) : GameObject(bType, fX, fY, fSizeL, fSizeH, cColor) //Child class from GameObject
 {
-	orientation = 0;
+	fOrientation = 0;
 }
+
+/*
+-----------------------------------------------------------------------
+|      Following are the methods corresponding to the Canon Class     |
+-----------------------------------------------------------------------
+*/
 
 void Canon::Rotate(float vLocalPositionX, float vLocalPositionY)
 {
 	if (vLocalPositionY < m_fY)
 	{
 		m_sGraphism->setOrigin(m_fSizeL / 2, 0);
-		orientation = Math::Rotate(this, vLocalPositionX, vLocalPositionY);
-		m_sGraphism->setRotation(orientation);
+		fOrientation = Math::Rotate(this, vLocalPositionX, vLocalPositionY);
+		m_sGraphism->setRotation(fOrientation);
 	}
 }
 

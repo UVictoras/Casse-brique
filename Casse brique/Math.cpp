@@ -2,6 +2,12 @@
 #include <cmath>
 #include "GameObject.h"
 
+/*
+-----------------------------------------------------------------------
+|   Following are the functions corresponding to the Math Namespace   |
+-----------------------------------------------------------------------
+*/
+
 void Math::Normalize(float* fX, float* fY)
 {
 	float xtmp = *fX;

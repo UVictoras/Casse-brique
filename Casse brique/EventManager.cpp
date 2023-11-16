@@ -2,6 +2,12 @@
 
 EventManager* EventManager::eInstance = nullptr;
 
+/*
+-----------------------------------------------------------------------
+|  Following are the methods corresponding to the EventManager Class  |
+-----------------------------------------------------------------------
+*/
+
 void EventManager::AddComponent(sf::Event::EventType eventType, sf::Mouse::Button mouseEvent, func event)
 {
     m_cMouseMap[eventType][mouseEvent] = *event;

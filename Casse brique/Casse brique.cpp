@@ -4,7 +4,7 @@
 
 int main()
 {
-    GameManager::Initialize();
+    GameManager::Initialize(); //Initializing GameManager's singleton instance
 
     GameManager::Get()->GameLoop();
 
