@@ -134,14 +134,6 @@ void GameManager::GameLoop()
 
     oCanon->m_sGraphism->setTexture(&tCanon);
 
-
-    /*
-    for (int l = 0; l < 64; l++)
-    {
-        Brick* bBrick = new Brick(true, (600.f + (l * 85.f)) - ((l / 8) * 85.f) * 8, 35.f + ((l / 8) * 85.f), 75.f, 50.f, sf::Color::Blue);
-        m_oBricks.push_back(bBrick);
-    }*/
-
     EventManager::Initialize();
     eEventManager->Get()->AddComponent(sf::Event::EventType::MouseButtonPressed, sf::Mouse::Left, &EventCreateBall);
     eEventManager->Get()->AddComponent(sf::Event::EventType::KeyPressed, sf::Keyboard::Key::Escape, &EventCloseWindow);
